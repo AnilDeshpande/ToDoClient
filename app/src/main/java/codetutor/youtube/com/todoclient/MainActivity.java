@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button buttonGetAllToDos, buttonGetToDoForPlace;
 
-    private Uri uriAllToDos = Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE");
-    private Uri uriForSpecificPlace=Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE_FROM_PLACE");
-    private Uri uriToDoCount=Uri.parse("content://todolist.youtube.com.codetutor/TOTAL_TODOS");
+    private Uri CONTENT_URI_1 = Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE");
+    private Uri CONTENT_URI_2 =Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE_FROM_PLACE");
+    private Uri CONTENT_URI_3 =Uri.parse("content://todolist.youtube.com.codetutor/TOTAL_TODOS");
 
     private ContentResolver contentResolver;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setAllToDos(){
-        Cursor cursor=contentResolver.query(uriAllToDos,null,null,null,null,null);
+        Cursor cursor=contentResolver.query(CONTENT_URI_1,null,null,null,null,null);
         StringBuilder stringBuilder=new StringBuilder("");
         if(cursor!=null &cursor.getCount()>0){
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setSpecificPlaceToDos(){
         String place=editTextWhere.getText().toString();
         StringBuilder stringBuilder=new StringBuilder("");
-        Cursor cursor=contentResolver.query(uriForSpecificPlace,null,null,new String[]{place},null,null);
+        Cursor cursor=contentResolver.query(CONTENT_URI_2,null,null,new String[]{place},null,null);
 
         if(cursor!=null &cursor.getCount()>0){
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setCount(){
-        Cursor cursor=contentResolver.query(uriToDoCount,null,null,null,null,null);
+        Cursor cursor=contentResolver.query(CONTENT_URI_3,null,null,null,null,null);
         if(cursor!=null && cursor.getCount()>0){
             cursor.moveToFirst();
             textViewCount.setText("Total ToDos Count: "+cursor.getInt(0));
