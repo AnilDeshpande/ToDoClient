@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG=MainActivity.class.getSimpleName();
 
-    private TextView textViewContent;
+    private TextView textViewContent,textViewCount;
 
     private EditText editTextWhere;
 
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Uri uriAllToDos = Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE");
     private Uri uriForSpecificPlace=Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE_FROM_PLACE");
+    private Uri uriToDoCount=Uri.parse("content://todolist.youtube.com.codetutor/TOTAL_TODOS");
 
     private ContentResolver contentResolver;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         textViewContent=(TextView)findViewById(R.id.textViewContent);
+        textViewCount=(TextView)findViewById(R.id.textViewCount);
         editTextWhere=(EditText)findViewById(R.id.editTextWhere);
 
         buttonGetAllToDos=(Button)findViewById(R.id.buttonGetAllToDos);
@@ -41,6 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         contentResolver=getContentResolver();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setCount();
     }
 
     @Override
@@ -77,5 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         cursor.close();
         textViewContent.setText(stringBuilder.toString());
+    }
+
+    private void setCount(){
+        Cursor cursor=contentResolver.query(uriToDoCount,null,null,null,null,null);
+        if(cursor!=null && cursor.getCount()>0){
+            cursor.moveToFirst();
+            textViewCount.setText("Total ToDos Count: "+cursor.getInt(0));
+        }
+        cursor.close();
     }
 }
