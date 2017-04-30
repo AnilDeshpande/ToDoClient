@@ -19,8 +19,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     private static String TAG=SecondActivity.class.getSimpleName();
 
-    private Uri CONTENT_URI_1 = Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE");
-
     ContentResolver contentResolver;
 
     private EditText editTextNewToDoString, editTextPlace, editTextToDoId, editTextNewToDo;
@@ -64,20 +62,20 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         String place=editTextPlace.getText().toString();
 
         ContentValues contentValues=new ContentValues();
-        contentValues.put("todo",todo);
-        contentValues.put("place",place);
+        contentValues.put(ToDoProviderConstants.COLUMN_TODO,todo);
+        contentValues.put(ToDoProviderConstants.COLUMN_PLACE,place);
 
-        contentResolver.insert(CONTENT_URI_1,contentValues);
+        contentResolver.insert(ToDoProviderConstants.CONTENT_URI_1,contentValues);
         finish();
     }
 
     private void updateToDo(){
         ContentValues contentValues=new ContentValues();
-        contentValues.put("todo",editTextNewToDo.getText().toString());
-        String whereClause= "task_id = ?";
+        contentValues.put(ToDoProviderConstants.COLUMN_TODO,editTextNewToDo.getText().toString());
+        String whereClause= ToDoProviderConstants.COLUMN_TODO_ID+" = ?";
         String [] whereValues=new String []{editTextToDoId.getText().toString()};
 
-        contentResolver.update(CONTENT_URI_1,contentValues,whereClause,whereValues);
+        contentResolver.update(ToDoProviderConstants.CONTENT_URI_1,contentValues,whereClause,whereValues);
         finish();
     }
 
