@@ -1,6 +1,7 @@
 package codetutor.youtube.com.todoclient;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText editTextWhere;
 
-    private Button buttonGetAllToDos, buttonGetToDoForPlace;
+    private Button buttonGetAllToDos, buttonGetToDoForPlace, buttonNext;
 
     private Uri CONTENT_URI_1 = Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE");
     private Uri CONTENT_URI_2 =Uri.parse("content://todolist.youtube.com.codetutor/TODO_TABLE_FROM_PLACE");
@@ -37,9 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonGetAllToDos=(Button)findViewById(R.id.buttonGetAllToDos);
         buttonGetToDoForPlace=(Button)findViewById(R.id.buttonGetToDoForPlace);
+        buttonNext=(Button)findViewById(R.id.buttonNext);
 
         buttonGetAllToDos.setOnClickListener(this);
         buttonGetToDoForPlace.setOnClickListener(this);
+        buttonNext.setOnClickListener(this);
 
         contentResolver=getContentResolver();
 
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         setCount();
+        setAllToDos();
     }
 
     @Override
@@ -56,9 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.buttonGetAllToDos: setAllToDos(); break;
             case R.id.buttonGetToDoForPlace: setSpecificPlaceToDos(); break;
+            case R.id.buttonNext:startNextActivity();break;
         }
     }
 
+    private void startNextActivity(){
+        Intent intent=new Intent(getApplicationContext(),SecondActivity.class);
+        startActivity(intent);
+    }
     private void setAllToDos(){
         Cursor cursor=contentResolver.query(CONTENT_URI_1,null,null,null,null,null);
         StringBuilder stringBuilder=new StringBuilder("");
