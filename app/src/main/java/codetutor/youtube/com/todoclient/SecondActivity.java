@@ -43,9 +43,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         buttonModifyToDo.setOnClickListener(this);
 
         contentResolver=getContentResolver();
-
-
-
     }
 
     @Override
