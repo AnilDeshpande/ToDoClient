@@ -21,9 +21,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     ContentResolver contentResolver;
 
-    private EditText editTextNewToDoString, editTextPlace, editTextToDoId, editTextNewToDo;
-    private Button buttonAddToDo, buttonModifyToDo;
-    private TextView textViewToDos;
+    private EditText editTextNewToDoString, editTextPlace, editTextToDoId, editTextNewToDo, editTextDeleteToDoId;
+    private Button buttonAddToDo, buttonModifyToDo,buttonDeleteToDo;
 
 
     @Override
@@ -35,12 +34,15 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         editTextNewToDoString=(EditText)findViewById(R.id.editTextNewToDoString);
         editTextPlace=(EditText)findViewById(R.id.editTextPlace);
         editTextToDoId=(EditText)findViewById(R.id.editTextToDoId);
+        editTextDeleteToDoId=(EditText)findViewById(R.id.editTextDeleteToDoId);
 
         buttonAddToDo=(Button)findViewById(R.id.buttonAddToDo);
         buttonModifyToDo=(Button)findViewById(R.id.buttonModifyToDo);
+        buttonDeleteToDo=(Button)findViewById(R.id.buttonDeleteToDo);
 
         buttonAddToDo.setOnClickListener(this);
         buttonModifyToDo.setOnClickListener(this);
+        buttonDeleteToDo.setOnClickListener(this);
 
         contentResolver=getContentResolver();
     }
@@ -50,8 +52,15 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()){
             case  R.id.buttonAddToDo: addToDo(); break;
             case R.id.buttonModifyToDo: updateToDo(); break;
+            case R.id.buttonDeleteToDo: deleteToDo(); break;
             default:break;
         }
+    }
+
+    private void deleteToDo() {
+        String todoId=editTextDeleteToDoId.getText().toString();
+        contentResolver.delete(ToDoProviderConstants.CONTENT_URI_1,ToDoProviderConstants.COLUMN_TODO_ID +" = ?",new String[]{todoId});
+        finish();
     }
 
     private void addToDo(){

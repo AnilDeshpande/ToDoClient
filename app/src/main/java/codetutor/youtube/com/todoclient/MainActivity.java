@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
     private void setAllToDos(){
-        Cursor cursor=contentResolver.query(ToDoProviderConstants.CONTENT_URI_1,null,null,null,null,null);
+        Cursor cursor=contentResolver.query(ToDoProviderConstants.CONTENT_URI_1, null,null,null,null,null);
         StringBuilder stringBuilder=new StringBuilder("");
         if(cursor!=null &cursor.getCount()>0){
 

@@ -3,6 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:gravity="center"
+        android:background="@color/colorAccent">
+
+        <TextView android:text="Insert Functionality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            />
+        </LinearLayout>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,8 +46,16 @@
         android:layout_width="match_parent"
         android:layout_height="18dp"
         android:gravity="center"
-        android:background="@color/colorAccent"
-        />
+        android:background="@color/colorAccent">
+
+        <TextView android:text="Update Functionality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            />
+
+        </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,6 +89,46 @@
             android:gravity="center"
             android:id="@+id/editTextNewToDo"
             android:hint="Modify ToDo" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/buttonDeleteToDo"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/second_seperator"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:gravity="center"
+            android:id="@+id/editTextDeleteToDoId"
+            android:hint="TODO Id"
+            android:layout_below="@+id/second_seperator"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:id="@+id/second_seperator"
+            android:layout_below="@+id/editTextNewToDo"
+            android:background="@color/colorAccent">
+
+            <TextView android:text="Delete Functionality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                />
+
+            </LinearLayout>
+
     </RelativeLayout>
 
 
